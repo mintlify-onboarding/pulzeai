@@ -1,0 +1,4168 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "title": "Pulze.ai API",
+      "version": "0.1.0"
+    },
+    "paths": {
+      "/v1/billing/{key_id}": {
+        "get": {
+          "tags": [
+            "billing"
+          ],
+          "summary": "Read Billing By Key Id",
+          "description": "Get a specific API Key by id.",
+          "operationId": "read_billing_by_key_id_v1_billing__key_id__get",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "Key Id",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": "key_id",
+              "in": "path"
+            },
+            {
+              "required": true,
+              "schema": {
+                "title": "From Date",
+                "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                "type": "string",
+                "format": "date"
+              },
+              "name": "from_date",
+              "in": "query"
+            },
+            {
+              "required": true,
+              "schema": {
+                "title": "To Date",
+                "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                "type": "string",
+                "format": "date"
+              },
+              "name": "to_date",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "Key_Billing",
+                    "required": [
+                      "key_id",
+                      "auth0_id",
+                      "tokens_sum",
+                      "costs_sum"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "key_id": {
+                        "title": "Key Id",
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "auth0_id": {
+                        "title": "Auth0 Id",
+                        "type": "string"
+                      },
+                      "tokens_sum": {
+                        "title": "Tokens Sum",
+                        "type": "integer"
+                      },
+                      "costs_sum": {
+                        "title": "Costs Sum",
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/billing/{key_id}/minute": {
+        "get": {
+          "tags": [
+            "billing"
+          ],
+          "summary": "Read Billing By Key Id Daily",
+          "description": "Get a specific API Key by id.",
+          "operationId": "read_billing_by_key_id_daily_v1_billing__key_id__minute_get",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "Key Id",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": "key_id",
+              "in": "path"
+            },
+            {
+              "required": true,
+              "schema": {
+                "title": "From Date",
+                "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                "type": "string",
+                "format": "date"
+              },
+              "name": "from_date",
+              "in": "query"
+            },
+            {
+              "required": true,
+              "schema": {
+                "title": "To Date",
+                "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                "type": "string",
+                "format": "date"
+              },
+              "name": "to_date",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "Response Read Billing By Key Id Daily V1 Billing  Key Id  Minute Get",
+                    "type": "array",
+                    "items": {
+                      "title": "Key_Billing_Interval",
+                      "required": [
+                        "time",
+                        "prompt_cost",
+                        "completion_cost",
+                        "total_cost"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "time": {
+                          "title": "Time",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "prompt_cost": {
+                          "title": "Prompt Cost",
+                          "type": "number"
+                        },
+                        "completion_cost": {
+                          "title": "Completion Cost",
+                          "type": "number"
+                        },
+                        "total_cost": {
+                          "title": "Total Cost",
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/billing/{key_id}/daily": {
+        "get": {
+          "tags": [
+            "billing"
+          ],
+          "summary": "Read Billing By Key Id Daily",
+          "description": "Get a specific API Key by id.",
+          "operationId": "read_billing_by_key_id_daily_v1_billing__key_id__daily_get",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "Key Id",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": "key_id",
+              "in": "path"
+            },
+            {
+              "required": true,
+              "schema": {
+                "title": "From Date",
+                "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                "type": "string",
+                "format": "date"
+              },
+              "name": "from_date",
+              "in": "query"
+            },
+            {
+              "required": true,
+              "schema": {
+                "title": "To Date",
+                "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                "type": "string",
+                "format": "date"
+              },
+              "name": "to_date",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "Response Read Billing By Key Id Daily V1 Billing  Key Id  Daily Get",
+                    "type": "array",
+                    "items": {
+                      "title": "Key_Billing_Interval",
+                      "required": [
+                        "time",
+                        "prompt_cost",
+                        "completion_cost",
+                        "total_cost"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "time": {
+                          "title": "Time",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "prompt_cost": {
+                          "title": "Prompt Cost",
+                          "type": "number"
+                        },
+                        "completion_cost": {
+                          "title": "Completion Cost",
+                          "type": "number"
+                        },
+                        "total_cost": {
+                          "title": "Total Cost",
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/billing/{key_id}/monthly": {
+        "get": {
+          "tags": [
+            "billing"
+          ],
+          "summary": "Read Billing By Key Id Daily",
+          "description": "Get a specific API Key by id.",
+          "operationId": "read_billing_by_key_id_daily_v1_billing__key_id__monthly_get",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "Key Id",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": "key_id",
+              "in": "path"
+            },
+            {
+              "required": true,
+              "schema": {
+                "title": "From Date",
+                "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                "type": "string",
+                "format": "date"
+              },
+              "name": "from_date",
+              "in": "query"
+            },
+            {
+              "required": true,
+              "schema": {
+                "title": "To Date",
+                "pattern": "\\d{4}-\\d{2}-\\d{2}",
+                "type": "string",
+                "format": "date"
+              },
+              "name": "to_date",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "Response Read Billing By Key Id Daily V1 Billing  Key Id  Monthly Get",
+                    "type": "array",
+                    "items": {
+                      "title": "Key_Billing_Interval",
+                      "required": [
+                        "time",
+                        "prompt_cost",
+                        "completion_cost",
+                        "total_cost"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "time": {
+                          "title": "Time",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "prompt_cost": {
+                          "title": "Prompt Cost",
+                          "type": "number"
+                        },
+                        "completion_cost": {
+                          "title": "Completion Cost",
+                          "type": "number"
+                        },
+                        "total_cost": {
+                          "title": "Total Cost",
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/keys/": {
+        "get": {
+          "tags": [
+            "keys"
+          ],
+          "summary": "Read Api Keys",
+          "description": "Retrieve Keys.",
+          "operationId": "read_api_keys_v1_keys__get",
+          "parameters": [
+            {
+              "required": false,
+              "schema": {
+                "title": "Skip",
+                "type": "integer",
+                "default": 0
+              },
+              "name": "skip",
+              "in": "query"
+            },
+            {
+              "required": false,
+              "schema": {
+                "title": "Limit",
+                "type": "integer",
+                "default": 100
+              },
+              "name": "limit",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "Response Read Api Keys V1 Keys  Get",
+                    "type": "array",
+                    "items": {
+                      "title": "Key",
+                      "required": [
+                        "hashed_key",
+                        "key_end",
+                        "is_active",
+                        "id",
+                        "auth0_id"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "hashed_key": {
+                          "title": "Hashed Key",
+                          "type": "string"
+                        },
+                        "key_end": {
+                          "title": "Key End",
+                          "type": "string"
+                        },
+                        "description": {
+                          "title": "Description",
+                          "type": "string"
+                        },
+                        "model_settings": {
+                          "title": "Model Settings",
+                          "type": "object"
+                        },
+                        "key_configuration": {
+                          "title": "Key Configuration",
+                          "type": "object"
+                        },
+                        "is_active": {
+                          "title": "Is Active",
+                          "type": "boolean"
+                        },
+                        "id": {
+                          "title": "Id",
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "auth0_id": {
+                          "title": "Auth0 Id",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/keys/{id}": {
+        "put": {
+          "tags": [
+            "keys"
+          ],
+          "summary": "Update Key",
+          "description": "Update an Key.",
+          "operationId": "update_Key_v1_keys__id__put",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "Id",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": "id",
+              "in": "path"
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "KeyUpdate",
+                  "required": [
+                    "is_active"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "model_settings": {
+                      "title": "Model Settings",
+                      "type": "object"
+                    },
+                    "key_configuration": {
+                      "title": "Key Configuration",
+                      "type": "object"
+                    },
+                    "is_active": {
+                      "title": "Is Active",
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "Key",
+                    "required": [
+                      "hashed_key",
+                      "key_end",
+                      "is_active",
+                      "id",
+                      "auth0_id"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "hashed_key": {
+                        "title": "Hashed Key",
+                        "type": "string"
+                      },
+                      "key_end": {
+                        "title": "Key End",
+                        "type": "string"
+                      },
+                      "description": {
+                        "title": "Description",
+                        "type": "string"
+                      },
+                      "model_settings": {
+                        "title": "Model Settings",
+                        "type": "object"
+                      },
+                      "key_configuration": {
+                        "title": "Key Configuration",
+                        "type": "object"
+                      },
+                      "is_active": {
+                        "title": "Is Active",
+                        "type": "boolean"
+                      },
+                      "id": {
+                        "title": "Id",
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "auth0_id": {
+                        "title": "Auth0 Id",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        },
+        "delete": {
+          "tags": [
+            "keys"
+          ],
+          "summary": "Delete Api Key",
+          "description": "Delete existing Key.",
+          "operationId": "delete_api_key_v1_keys__id__delete",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "Id",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": "id",
+              "in": "path"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "KeyDeleteResponse",
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "title": "Id",
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/keys/create": {
+        "post": {
+          "tags": [
+            "keys"
+          ],
+          "summary": "Create Api Key",
+          "description": "Create new Key.",
+          "operationId": "create_api_key_v1_keys_create_post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "KeyCreate",
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "model_settings": {
+                      "title": "Model Settings",
+                      "default": {
+                        "gpt-4": {
+                          "description": "Description of openai gpt-4",
+                          "provider": "openai",
+                          "max_tokens": 8192,
+                          "active": false
+                        },
+                        "gpt-4-32k": {
+                          "description": "Description of openai gpt-4-32k",
+                          "provider": "openai",
+                          "max_tokens": 32768,
+                          "active": true
+                        },
+                        "gpt-3.5-turbo": {
+                          "description": "Description of openai gpt-3.5-turbo",
+                          "provider": "openai",
+                          "max_tokens": 4096,
+                          "active": true
+                        },
+                        "text-davinci-003": {
+                          "description": "Description of openai text-davinci-003",
+                          "provider": "openai",
+                          "max_tokens": 4000,
+                          "active": true
+                        },
+                        "text-davinci-002": {
+                          "description": "Description of openai text-davinci-002",
+                          "provider": "openai",
+                          "max_tokens": 4000,
+                          "active": true
+                        },
+                        "text-curie-001": {
+                          "description": "Description of openai text-curie-001",
+                          "provider": "openai",
+                          "max_tokens": 2048,
+                          "active": true
+                        },
+                        "text-babbage-001": {
+                          "description": "Description of openai text-babbage-001",
+                          "provider": "openai",
+                          "max_tokens": 2048,
+                          "active": true
+                        },
+                        "text-ada-001": {
+                          "description": "Description of openai text-ada-001",
+                          "provider": "openai",
+                          "max_tokens": 2048,
+                          "active": true
+                        },
+                        "gpt-j-6b": {
+                          "description": "Description of gooseai gpt-j-6b",
+                          "provider": "gooseai",
+                          "max_tokens": 2048,
+                          "active": true
+                        },
+                        "gpt-neo-20b": {
+                          "description": "Description of gooseai gpt-neo-20b",
+                          "provider": "gooseai",
+                          "max_tokens": 2048,
+                          "active": true
+                        }
+                      }
+                    },
+                    "key_configuration": {
+                      "title": "Key Configuration",
+                      "default": {
+                        "quality": 0.5,
+                        "latency": 0.3,
+                        "cost": 0.1,
+                        "priority": 0.1,
+                        "reference_model": "gpt-4"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "KeyCreateResponse",
+                    "type": "object",
+                    "properties": {
+                      "created_key": {
+                        "title": "Created Key",
+                        "type": "string"
+                      },
+                      "key_end": {
+                        "title": "Key End",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/logs/": {
+        "get": {
+          "tags": [
+            "logs"
+          ],
+          "summary": "Read Log By Owner",
+          "description": "Get all logs by owner.",
+          "operationId": "read_log_by_owner_v1_logs__get",
+          "parameters": [
+            {
+              "required": false,
+              "schema": {
+                "title": "Cursor",
+                "type": "string"
+              },
+              "name": "cursor",
+              "in": "query"
+            },
+            {
+              "required": false,
+              "schema": {
+                "title": "Size",
+                "minimum": 0,
+                "type": "integer",
+                "default": 50
+              },
+              "name": "size",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "CursorPage[Request_Normalized]",
+                    "required": [
+                      "items"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "items": {
+                        "title": "Items",
+                        "type": "array",
+                        "items": {
+                          "title": "Request_Normalized",
+                          "required": [
+                            "provider",
+                            "request_type",
+                            "response",
+                            "id",
+                            "prompt_tokens",
+                            "completion_tokens",
+                            "total_tokens",
+                            "prompt_tokens_cost",
+                            "completion_tokens_cost",
+                            "total_tokens_cost",
+                            "created"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "provider": {
+                              "title": "Provider",
+                              "type": "string"
+                            },
+                            "request_type": {
+                              "title": "Request Type",
+                              "type": "string"
+                            },
+                            "model": {
+                              "title": "Model",
+                              "type": "string"
+                            },
+                            "prompt": {
+                              "title": "Prompt",
+                              "type": "string"
+                            },
+                            "key_id": {
+                              "title": "Key Id",
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "auth0_id": {
+                              "title": "Auth0 Id",
+                              "type": "string"
+                            },
+                            "payload": {
+                              "title": "Payload",
+                              "type": "object"
+                            },
+                            "response": {
+                              "title": "Response",
+                              "type": "object"
+                            },
+                            "id": {
+                              "title": "Id",
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "prompt_tokens": {
+                              "title": "Prompt Tokens",
+                              "type": "integer"
+                            },
+                            "completion_tokens": {
+                              "title": "Completion Tokens",
+                              "type": "integer"
+                            },
+                            "total_tokens": {
+                              "title": "Total Tokens",
+                              "type": "integer"
+                            },
+                            "prompt_tokens_cost": {
+                              "title": "Prompt Tokens Cost",
+                              "type": "number"
+                            },
+                            "completion_tokens_cost": {
+                              "title": "Completion Tokens Cost",
+                              "type": "number"
+                            },
+                            "total_tokens_cost": {
+                              "title": "Total Tokens Cost",
+                              "type": "number"
+                            },
+                            "created": {
+                              "title": "Created",
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          }
+                        }
+                      },
+                      "previous_page": {
+                        "title": "Previous Page",
+                        "type": "string",
+                        "description": "Cursor for the previous page"
+                      },
+                      "next_page": {
+                        "title": "Next Page",
+                        "type": "string",
+                        "description": "Cursor for the next page"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/logs/{key_id}": {
+        "get": {
+          "tags": [
+            "logs"
+          ],
+          "summary": "Read Log By Key Id",
+          "description": "Get a specific log by key id.\nIf key got revoked this endpoint won't return it logs. Use \"/\" instead",
+          "operationId": "read_log_by_key_id_v1_logs__key_id__get",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "Key Id",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": "key_id",
+              "in": "path"
+            },
+            {
+              "required": false,
+              "schema": {
+                "title": "Cursor",
+                "type": "string"
+              },
+              "name": "cursor",
+              "in": "query"
+            },
+            {
+              "required": false,
+              "schema": {
+                "title": "Size",
+                "minimum": 0,
+                "type": "integer",
+                "default": 50
+              },
+              "name": "size",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "CursorPage[Request_Normalized]",
+                    "required": [
+                      "items"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "items": {
+                        "title": "Items",
+                        "type": "array",
+                        "items": {
+                          "title": "Request_Normalized",
+                          "required": [
+                            "provider",
+                            "request_type",
+                            "response",
+                            "id",
+                            "prompt_tokens",
+                            "completion_tokens",
+                            "total_tokens",
+                            "prompt_tokens_cost",
+                            "completion_tokens_cost",
+                            "total_tokens_cost",
+                            "created"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "provider": {
+                              "title": "Provider",
+                              "type": "string"
+                            },
+                            "request_type": {
+                              "title": "Request Type",
+                              "type": "string"
+                            },
+                            "model": {
+                              "title": "Model",
+                              "type": "string"
+                            },
+                            "prompt": {
+                              "title": "Prompt",
+                              "type": "string"
+                            },
+                            "key_id": {
+                              "title": "Key Id",
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "auth0_id": {
+                              "title": "Auth0 Id",
+                              "type": "string"
+                            },
+                            "payload": {
+                              "title": "Payload",
+                              "type": "object"
+                            },
+                            "response": {
+                              "title": "Response",
+                              "type": "object"
+                            },
+                            "id": {
+                              "title": "Id",
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "prompt_tokens": {
+                              "title": "Prompt Tokens",
+                              "type": "integer"
+                            },
+                            "completion_tokens": {
+                              "title": "Completion Tokens",
+                              "type": "integer"
+                            },
+                            "total_tokens": {
+                              "title": "Total Tokens",
+                              "type": "integer"
+                            },
+                            "prompt_tokens_cost": {
+                              "title": "Prompt Tokens Cost",
+                              "type": "number"
+                            },
+                            "completion_tokens_cost": {
+                              "title": "Completion Tokens Cost",
+                              "type": "number"
+                            },
+                            "total_tokens_cost": {
+                              "title": "Total Tokens Cost",
+                              "type": "number"
+                            },
+                            "created": {
+                              "title": "Created",
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          }
+                        }
+                      },
+                      "previous_page": {
+                        "title": "Previous Page",
+                        "type": "string",
+                        "description": "Cursor for the previous page"
+                      },
+                      "next_page": {
+                        "title": "Next Page",
+                        "type": "string",
+                        "description": "Cursor for the next page"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/org/create": {
+        "post": {
+          "tags": [
+            "org"
+          ],
+          "summary": "Create Org",
+          "description": "Create new organization.",
+          "operationId": "create_org_v1_org_create_post",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "Org Name",
+                "type": "string"
+              },
+              "name": "org_name",
+              "in": "query"
+            },
+            {
+              "required": false,
+              "schema": {
+                "title": "Org Display Name",
+                "type": "string"
+              },
+              "name": "org_display_name",
+              "in": "query"
+            },
+            {
+              "required": false,
+              "schema": {
+                "title": "Org Logo",
+                "type": "string"
+              },
+              "name": "org_logo",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "OrgCreateResponse",
+                    "required": [
+                      "org_name"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "org_name": {
+                        "title": "Org Name",
+                        "type": "string"
+                      },
+                      "org_display_name": {
+                        "title": "Org Display Name",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/org/admins": {
+        "get": {
+          "tags": [
+            "org"
+          ],
+          "summary": "Read Api Keys",
+          "description": "Retrieve Keys.",
+          "operationId": "read_api_keys_v1_org_admins_get",
+          "parameters": [
+            {
+              "required": false,
+              "schema": {
+                "title": "Skip",
+                "type": "integer",
+                "default": 0
+              },
+              "name": "skip",
+              "in": "query"
+            },
+            {
+              "required": false,
+              "schema": {
+                "title": "Limit",
+                "type": "integer",
+                "default": 100
+              },
+              "name": "limit",
+              "in": "query"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "Response Read Api Keys V1 Org Admins Get",
+                    "type": "array",
+                    "items": {
+                      "title": "OrgAdminAuth0",
+                      "required": [
+                        "email"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "title": "Email",
+                          "type": "string"
+                        },
+                        "email_verified": {
+                          "title": "Email Verified",
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "title": "Name",
+                          "type": "string"
+                        },
+                        "given_name": {
+                          "title": "Given Name",
+                          "type": "string"
+                        },
+                        "family_name": {
+                          "title": "Family Name",
+                          "type": "string"
+                        },
+                        "picture": {
+                          "title": "Picture",
+                          "type": "string"
+                        },
+                        "locale": {
+                          "title": "Locale",
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "title": "Updated At",
+                          "type": "string"
+                        },
+                        "user_id": {
+                          "title": "User Id",
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "title": "Nickname",
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "title": "Created At",
+                          "type": "string"
+                        },
+                        "last_login": {
+                          "title": "Last Login",
+                          "type": "string"
+                        },
+                        "last_ip": {
+                          "title": "Last Ip",
+                          "type": "string"
+                        },
+                        "logins_count": {
+                          "title": "Logins Count",
+                          "type": "string"
+                        },
+                        "blocked": {
+                          "title": "Blocked",
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "user_metadata": {
+                          "title": "User Metadata",
+                          "allOf": [
+                            {
+                              "title": "UserMetadata",
+                              "type": "object",
+                              "properties": {
+                                "is_admin": {
+                                  "title": "Is Admin",
+                                  "type": "boolean"
+                                },
+                                "is_editor": {
+                                  "title": "Is Editor",
+                                  "type": "boolean"
+                                },
+                                "is_viewer": {
+                                  "title": "Is Viewer",
+                                  "type": "boolean"
+                                },
+                                "is_active": {
+                                  "title": "Is Active",
+                                  "type": "boolean"
+                                },
+                                "org_id": {
+                                  "title": "Org Id",
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "org_invite_pending": {
+                                  "title": "Org Invite Pending",
+                                  "type": "boolean"
+                                }
+                              }
+                            }
+                          ],
+                          "default": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/updater/": {
+        "get": {
+          "tags": [
+            "updater"
+          ],
+          "summary": "Retrieve Knowledge Graph",
+          "description": "Retrieve Pulze Knowledge Graph.",
+          "operationId": "retrieve_knowledge_graph_v1_updater__get",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "RoutingTable",
+                    "required": [
+                      "openai",
+                      "gooseai"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "openai": {
+                        "title": "Provider",
+                        "required": [
+                          "model"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "active": {
+                            "title": "Active",
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "weight": {
+                            "title": "Weight",
+                            "type": "integer",
+                            "default": 99
+                          },
+                          "model": {
+                            "title": "Model",
+                            "type": "object",
+                            "additionalProperties": {
+                              "title": "Model",
+                              "required": [
+                                "price_per_token_usd",
+                                "category"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "title": "Active",
+                                  "type": "boolean",
+                                  "default": false
+                                },
+                                "chat": {
+                                  "title": "Chat",
+                                  "type": "boolean",
+                                  "default": true
+                                },
+                                "latency": {
+                                  "title": "Latency",
+                                  "type": "integer",
+                                  "default": 1
+                                },
+                                "max_token_request": {
+                                  "title": "Max Token Request",
+                                  "type": "integer",
+                                  "default": 0
+                                },
+                                "weight": {
+                                  "title": "Weight",
+                                  "type": "integer",
+                                  "default": 99
+                                },
+                                "price_per_token_usd": {
+                                  "title": "Price Per Token Usd",
+                                  "type": "number"
+                                },
+                                "category": {
+                                  "title": "Category",
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "gooseai": {
+                        "title": "Provider",
+                        "required": [
+                          "model"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "active": {
+                            "title": "Active",
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "weight": {
+                            "title": "Weight",
+                            "type": "integer",
+                            "default": 99
+                          },
+                          "model": {
+                            "title": "Model",
+                            "type": "object",
+                            "additionalProperties": {
+                              "title": "Model",
+                              "required": [
+                                "price_per_token_usd",
+                                "category"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "title": "Active",
+                                  "type": "boolean",
+                                  "default": false
+                                },
+                                "chat": {
+                                  "title": "Chat",
+                                  "type": "boolean",
+                                  "default": true
+                                },
+                                "latency": {
+                                  "title": "Latency",
+                                  "type": "integer",
+                                  "default": 1
+                                },
+                                "max_token_request": {
+                                  "title": "Max Token Request",
+                                  "type": "integer",
+                                  "default": 0
+                                },
+                                "weight": {
+                                  "title": "Weight",
+                                  "type": "integer",
+                                  "default": 99
+                                },
+                                "price_per_token_usd": {
+                                  "title": "Price Per Token Usd",
+                                  "type": "number"
+                                },
+                                "category": {
+                                  "title": "Category",
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/updater/init": {
+        "post": {
+          "tags": [
+            "updater"
+          ],
+          "summary": "Init Knowledge Graph",
+          "description": "Initialize Pulze Knowledge Graph.\nThis flushes the entire Redis Cache",
+          "operationId": "init_knowledge_graph_v1_updater_init_post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "RoutingTable",
+                  "required": [
+                    "openai",
+                    "gooseai"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "openai": {
+                      "title": "Provider",
+                      "required": [
+                        "model"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "active": {
+                          "title": "Active",
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "weight": {
+                          "title": "Weight",
+                          "type": "integer",
+                          "default": 99
+                        },
+                        "model": {
+                          "title": "Model",
+                          "type": "object",
+                          "additionalProperties": {
+                            "title": "Model",
+                            "required": [
+                              "price_per_token_usd",
+                              "category"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "active": {
+                                "title": "Active",
+                                "type": "boolean",
+                                "default": false
+                              },
+                              "chat": {
+                                "title": "Chat",
+                                "type": "boolean",
+                                "default": true
+                              },
+                              "latency": {
+                                "title": "Latency",
+                                "type": "integer",
+                                "default": 1
+                              },
+                              "max_token_request": {
+                                "title": "Max Token Request",
+                                "type": "integer",
+                                "default": 0
+                              },
+                              "weight": {
+                                "title": "Weight",
+                                "type": "integer",
+                                "default": 99
+                              },
+                              "price_per_token_usd": {
+                                "title": "Price Per Token Usd",
+                                "type": "number"
+                              },
+                              "category": {
+                                "title": "Category",
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "gooseai": {
+                      "title": "Provider",
+                      "required": [
+                        "model"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "active": {
+                          "title": "Active",
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "weight": {
+                          "title": "Weight",
+                          "type": "integer",
+                          "default": 99
+                        },
+                        "model": {
+                          "title": "Model",
+                          "type": "object",
+                          "additionalProperties": {
+                            "title": "Model",
+                            "required": [
+                              "price_per_token_usd",
+                              "category"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "active": {
+                                "title": "Active",
+                                "type": "boolean",
+                                "default": false
+                              },
+                              "chat": {
+                                "title": "Chat",
+                                "type": "boolean",
+                                "default": true
+                              },
+                              "latency": {
+                                "title": "Latency",
+                                "type": "integer",
+                                "default": 1
+                              },
+                              "max_token_request": {
+                                "title": "Max Token Request",
+                                "type": "integer",
+                                "default": 0
+                              },
+                              "weight": {
+                                "title": "Weight",
+                                "type": "integer",
+                                "default": 99
+                              },
+                              "price_per_token_usd": {
+                                "title": "Price Per Token Usd",
+                                "type": "number"
+                              },
+                              "category": {
+                                "title": "Category",
+                                "type": "object",
+                                "additionalProperties": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "RoutingTable",
+                    "required": [
+                      "openai",
+                      "gooseai"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "openai": {
+                        "title": "Provider",
+                        "required": [
+                          "model"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "active": {
+                            "title": "Active",
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "weight": {
+                            "title": "Weight",
+                            "type": "integer",
+                            "default": 99
+                          },
+                          "model": {
+                            "title": "Model",
+                            "type": "object",
+                            "additionalProperties": {
+                              "title": "Model",
+                              "required": [
+                                "price_per_token_usd",
+                                "category"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "title": "Active",
+                                  "type": "boolean",
+                                  "default": false
+                                },
+                                "chat": {
+                                  "title": "Chat",
+                                  "type": "boolean",
+                                  "default": true
+                                },
+                                "latency": {
+                                  "title": "Latency",
+                                  "type": "integer",
+                                  "default": 1
+                                },
+                                "max_token_request": {
+                                  "title": "Max Token Request",
+                                  "type": "integer",
+                                  "default": 0
+                                },
+                                "weight": {
+                                  "title": "Weight",
+                                  "type": "integer",
+                                  "default": 99
+                                },
+                                "price_per_token_usd": {
+                                  "title": "Price Per Token Usd",
+                                  "type": "number"
+                                },
+                                "category": {
+                                  "title": "Category",
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "gooseai": {
+                        "title": "Provider",
+                        "required": [
+                          "model"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "active": {
+                            "title": "Active",
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "weight": {
+                            "title": "Weight",
+                            "type": "integer",
+                            "default": 99
+                          },
+                          "model": {
+                            "title": "Model",
+                            "type": "object",
+                            "additionalProperties": {
+                              "title": "Model",
+                              "required": [
+                                "price_per_token_usd",
+                                "category"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "title": "Active",
+                                  "type": "boolean",
+                                  "default": false
+                                },
+                                "chat": {
+                                  "title": "Chat",
+                                  "type": "boolean",
+                                  "default": true
+                                },
+                                "latency": {
+                                  "title": "Latency",
+                                  "type": "integer",
+                                  "default": 1
+                                },
+                                "max_token_request": {
+                                  "title": "Max Token Request",
+                                  "type": "integer",
+                                  "default": 0
+                                },
+                                "weight": {
+                                  "title": "Weight",
+                                  "type": "integer",
+                                  "default": 99
+                                },
+                                "price_per_token_usd": {
+                                  "title": "Price Per Token Usd",
+                                  "type": "number"
+                                },
+                                "category": {
+                                  "title": "Category",
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/updater/{key}": {
+        "put": {
+          "tags": [
+            "updater"
+          ],
+          "summary": "Update Key",
+          "description": "Update a specific key in the Redis Knowledge Graph.",
+          "operationId": "update_key_v1_updater__key__put",
+          "parameters": [
+            {
+              "required": true,
+              "schema": {
+                "title": "Key",
+                "type": "string"
+              },
+              "name": "key",
+              "in": "path"
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Body",
+                  "type": "object"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "RoutingTable",
+                    "required": [
+                      "openai",
+                      "gooseai"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "openai": {
+                        "title": "Provider",
+                        "required": [
+                          "model"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "active": {
+                            "title": "Active",
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "weight": {
+                            "title": "Weight",
+                            "type": "integer",
+                            "default": 99
+                          },
+                          "model": {
+                            "title": "Model",
+                            "type": "object",
+                            "additionalProperties": {
+                              "title": "Model",
+                              "required": [
+                                "price_per_token_usd",
+                                "category"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "title": "Active",
+                                  "type": "boolean",
+                                  "default": false
+                                },
+                                "chat": {
+                                  "title": "Chat",
+                                  "type": "boolean",
+                                  "default": true
+                                },
+                                "latency": {
+                                  "title": "Latency",
+                                  "type": "integer",
+                                  "default": 1
+                                },
+                                "max_token_request": {
+                                  "title": "Max Token Request",
+                                  "type": "integer",
+                                  "default": 0
+                                },
+                                "weight": {
+                                  "title": "Weight",
+                                  "type": "integer",
+                                  "default": 99
+                                },
+                                "price_per_token_usd": {
+                                  "title": "Price Per Token Usd",
+                                  "type": "number"
+                                },
+                                "category": {
+                                  "title": "Category",
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "gooseai": {
+                        "title": "Provider",
+                        "required": [
+                          "model"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "active": {
+                            "title": "Active",
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "weight": {
+                            "title": "Weight",
+                            "type": "integer",
+                            "default": 99
+                          },
+                          "model": {
+                            "title": "Model",
+                            "type": "object",
+                            "additionalProperties": {
+                              "title": "Model",
+                              "required": [
+                                "price_per_token_usd",
+                                "category"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "active": {
+                                  "title": "Active",
+                                  "type": "boolean",
+                                  "default": false
+                                },
+                                "chat": {
+                                  "title": "Chat",
+                                  "type": "boolean",
+                                  "default": true
+                                },
+                                "latency": {
+                                  "title": "Latency",
+                                  "type": "integer",
+                                  "default": 1
+                                },
+                                "max_token_request": {
+                                  "title": "Max Token Request",
+                                  "type": "integer",
+                                  "default": 0
+                                },
+                                "weight": {
+                                  "title": "Weight",
+                                  "type": "integer",
+                                  "default": 99
+                                },
+                                "price_per_token_usd": {
+                                  "title": "Price Per Token Usd",
+                                  "type": "number"
+                                },
+                                "category": {
+                                  "title": "Category",
+                                  "type": "object",
+                                  "additionalProperties": {
+                                    "type": "integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/chat/completions": {
+        "post": {
+          "tags": [
+            "chat"
+          ],
+          "summary": "Protected Chat Completions",
+          "operationId": "protected_chat_completions_v1_chat_completions_post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ChatCompletionRequest",
+                  "type": "object",
+                  "properties": {
+                    "messages": {
+                      "title": "Messages",
+                      "type": "array",
+                      "items": {},
+                      "default": [
+                        {
+                          "role": "user",
+                          "content": "Hello!"
+                        }
+                      ]
+                    },
+                    "model": {
+                      "title": "Model",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "max_tokens": {
+                      "title": "Max Tokens",
+                      "type": "integer",
+                      "default": 16
+                    },
+                    "temperature": {
+                      "title": "Temperature",
+                      "type": "number",
+                      "default": 1
+                    },
+                    "top_p": {
+                      "title": "Top P",
+                      "type": "number",
+                      "default": 1
+                    },
+                    "n": {
+                      "title": "N",
+                      "type": "integer",
+                      "default": 1
+                    },
+                    "stream": {
+                      "title": "Stream",
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "stop": {
+                      "title": "Stop",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "presence_penalty": {
+                      "title": "Presence Penalty",
+                      "type": "number",
+                      "default": 0
+                    },
+                    "frequency_penalty": {
+                      "title": "Frequency Penalty",
+                      "type": "number",
+                      "default": 0
+                    },
+                    "logit_bias": {
+                      "title": "Logit Bias",
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "user": {
+                      "title": "User",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "provider": {
+                      "title": "Provider",
+                      "type": "string",
+                      "default": ""
+                    }
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      },
+      "/v1/completions": {
+        "post": {
+          "tags": [
+            "completions"
+          ],
+          "summary": "Protected Completions",
+          "operationId": "protected_completions_v1_completions_post",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "CompletionRequest",
+                  "type": "object",
+                  "properties": {
+                    "prompt": {
+                      "title": "Prompt",
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {}
+                        }
+                      ],
+                      "default": "What color is the sky?"
+                    },
+                    "model": {
+                      "title": "Model",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "suffix": {
+                      "title": "Suffix",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "max_tokens": {
+                      "title": "Max Tokens",
+                      "type": "integer",
+                      "default": 16
+                    },
+                    "temperature": {
+                      "title": "Temperature",
+                      "type": "number",
+                      "default": 1
+                    },
+                    "top_p": {
+                      "title": "Top P",
+                      "type": "number",
+                      "default": 1
+                    },
+                    "n": {
+                      "title": "N",
+                      "type": "integer",
+                      "default": 1
+                    },
+                    "stream": {
+                      "title": "Stream",
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "logprobs": {
+                      "title": "Logprobs",
+                      "type": "integer"
+                    },
+                    "echo": {
+                      "title": "Echo",
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "stop": {
+                      "title": "Stop",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "presence_penalty": {
+                      "title": "Presence Penalty",
+                      "type": "number",
+                      "default": 0
+                    },
+                    "frequency_penalty": {
+                      "title": "Frequency Penalty",
+                      "type": "number",
+                      "default": 0
+                    },
+                    "best_of": {
+                      "title": "Best Of",
+                      "type": "integer",
+                      "default": 1
+                    },
+                    "logit_bias": {
+                      "title": "Logit Bias",
+                      "anyOf": [
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "user": {
+                      "title": "User",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "provider": {
+                      "title": "Provider",
+                      "type": "string",
+                      "default": ""
+                    }
+                  }
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "title": "HTTPValidationError",
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                          "title": "ValidationError",
+                          "required": [
+                            "loc",
+                            "msg",
+                            "type"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "loc": {
+                              "title": "Location",
+                              "type": "array",
+                              "items": {
+                                "anyOf": [
+                                  {
+                                    "type": "string"
+                                  },
+                                  {
+                                    "type": "integer"
+                                  }
+                                ]
+                              }
+                            },
+                            "msg": {
+                              "title": "Message",
+                              "type": "string"
+                            },
+                            "type": {
+                              "title": "Error Type",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "HTTPBearer": []
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "ChatCompletionRequest": {
+          "title": "ChatCompletionRequest",
+          "type": "object",
+          "properties": {
+            "messages": {
+              "title": "Messages",
+              "type": "array",
+              "items": {},
+              "default": [
+                {
+                  "role": "user",
+                  "content": "Hello!"
+                }
+              ]
+            },
+            "model": {
+              "title": "Model",
+              "type": "string",
+              "default": ""
+            },
+            "max_tokens": {
+              "title": "Max Tokens",
+              "type": "integer",
+              "default": 16
+            },
+            "temperature": {
+              "title": "Temperature",
+              "type": "number",
+              "default": 1
+            },
+            "top_p": {
+              "title": "Top P",
+              "type": "number",
+              "default": 1
+            },
+            "n": {
+              "title": "N",
+              "type": "integer",
+              "default": 1
+            },
+            "stream": {
+              "title": "Stream",
+              "type": "boolean",
+              "default": false
+            },
+            "stop": {
+              "title": "Stop",
+              "type": "string",
+              "default": ""
+            },
+            "presence_penalty": {
+              "title": "Presence Penalty",
+              "type": "number",
+              "default": 0
+            },
+            "frequency_penalty": {
+              "title": "Frequency Penalty",
+              "type": "number",
+              "default": 0
+            },
+            "logit_bias": {
+              "title": "Logit Bias",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "user": {
+              "title": "User",
+              "type": "string",
+              "default": ""
+            },
+            "provider": {
+              "title": "Provider",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "CompletionRequest": {
+          "title": "CompletionRequest",
+          "type": "object",
+          "properties": {
+            "prompt": {
+              "title": "Prompt",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {}
+                }
+              ],
+              "default": "What color is the sky?"
+            },
+            "model": {
+              "title": "Model",
+              "type": "string",
+              "default": ""
+            },
+            "suffix": {
+              "title": "Suffix",
+              "type": "string",
+              "default": ""
+            },
+            "max_tokens": {
+              "title": "Max Tokens",
+              "type": "integer",
+              "default": 16
+            },
+            "temperature": {
+              "title": "Temperature",
+              "type": "number",
+              "default": 1
+            },
+            "top_p": {
+              "title": "Top P",
+              "type": "number",
+              "default": 1
+            },
+            "n": {
+              "title": "N",
+              "type": "integer",
+              "default": 1
+            },
+            "stream": {
+              "title": "Stream",
+              "type": "boolean",
+              "default": false
+            },
+            "logprobs": {
+              "title": "Logprobs",
+              "type": "integer"
+            },
+            "echo": {
+              "title": "Echo",
+              "type": "boolean",
+              "default": false
+            },
+            "stop": {
+              "title": "Stop",
+              "type": "string",
+              "default": ""
+            },
+            "presence_penalty": {
+              "title": "Presence Penalty",
+              "type": "number",
+              "default": 0
+            },
+            "frequency_penalty": {
+              "title": "Frequency Penalty",
+              "type": "number",
+              "default": 0
+            },
+            "best_of": {
+              "title": "Best Of",
+              "type": "integer",
+              "default": 1
+            },
+            "logit_bias": {
+              "title": "Logit Bias",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "user": {
+              "title": "User",
+              "type": "string",
+              "default": ""
+            },
+            "provider": {
+              "title": "Provider",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "CursorPage_Request_Normalized_": {
+          "title": "CursorPage[Request_Normalized]",
+          "required": [
+            "items"
+          ],
+          "type": "object",
+          "properties": {
+            "items": {
+              "title": "Items",
+              "type": "array",
+              "items": {
+                "title": "Request_Normalized",
+                "required": [
+                  "provider",
+                  "request_type",
+                  "response",
+                  "id",
+                  "prompt_tokens",
+                  "completion_tokens",
+                  "total_tokens",
+                  "prompt_tokens_cost",
+                  "completion_tokens_cost",
+                  "total_tokens_cost",
+                  "created"
+                ],
+                "type": "object",
+                "properties": {
+                  "provider": {
+                    "title": "Provider",
+                    "type": "string"
+                  },
+                  "request_type": {
+                    "title": "Request Type",
+                    "type": "string"
+                  },
+                  "model": {
+                    "title": "Model",
+                    "type": "string"
+                  },
+                  "prompt": {
+                    "title": "Prompt",
+                    "type": "string"
+                  },
+                  "key_id": {
+                    "title": "Key Id",
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "auth0_id": {
+                    "title": "Auth0 Id",
+                    "type": "string"
+                  },
+                  "payload": {
+                    "title": "Payload",
+                    "type": "object"
+                  },
+                  "response": {
+                    "title": "Response",
+                    "type": "object"
+                  },
+                  "id": {
+                    "title": "Id",
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "prompt_tokens": {
+                    "title": "Prompt Tokens",
+                    "type": "integer"
+                  },
+                  "completion_tokens": {
+                    "title": "Completion Tokens",
+                    "type": "integer"
+                  },
+                  "total_tokens": {
+                    "title": "Total Tokens",
+                    "type": "integer"
+                  },
+                  "prompt_tokens_cost": {
+                    "title": "Prompt Tokens Cost",
+                    "type": "number"
+                  },
+                  "completion_tokens_cost": {
+                    "title": "Completion Tokens Cost",
+                    "type": "number"
+                  },
+                  "total_tokens_cost": {
+                    "title": "Total Tokens Cost",
+                    "type": "number"
+                  },
+                  "created": {
+                    "title": "Created",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            },
+            "previous_page": {
+              "title": "Previous Page",
+              "type": "string",
+              "description": "Cursor for the previous page"
+            },
+            "next_page": {
+              "title": "Next Page",
+              "type": "string",
+              "description": "Cursor for the next page"
+            }
+          }
+        },
+        "HTTPValidationError": {
+          "title": "HTTPValidationError",
+          "type": "object",
+          "properties": {
+            "detail": {
+              "title": "Detail",
+              "type": "array",
+              "items": {
+                "title": "ValidationError",
+                "required": [
+                  "loc",
+                  "msg",
+                  "type"
+                ],
+                "type": "object",
+                "properties": {
+                  "loc": {
+                    "title": "Location",
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "integer"
+                        }
+                      ]
+                    }
+                  },
+                  "msg": {
+                    "title": "Message",
+                    "type": "string"
+                  },
+                  "type": {
+                    "title": "Error Type",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Key": {
+          "title": "Key",
+          "required": [
+            "hashed_key",
+            "key_end",
+            "is_active",
+            "id",
+            "auth0_id"
+          ],
+          "type": "object",
+          "properties": {
+            "hashed_key": {
+              "title": "Hashed Key",
+              "type": "string"
+            },
+            "key_end": {
+              "title": "Key End",
+              "type": "string"
+            },
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "model_settings": {
+              "title": "Model Settings",
+              "type": "object"
+            },
+            "key_configuration": {
+              "title": "Key Configuration",
+              "type": "object"
+            },
+            "is_active": {
+              "title": "Is Active",
+              "type": "boolean"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string",
+              "format": "uuid"
+            },
+            "auth0_id": {
+              "title": "Auth0 Id",
+              "type": "string"
+            }
+          }
+        },
+        "KeyCreate": {
+          "title": "KeyCreate",
+          "type": "object",
+          "properties": {
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "model_settings": {
+              "title": "Model Settings",
+              "default": {
+                "gpt-4": {
+                  "description": "Description of openai gpt-4",
+                  "provider": "openai",
+                  "max_tokens": 8192,
+                  "active": false
+                },
+                "gpt-4-32k": {
+                  "description": "Description of openai gpt-4-32k",
+                  "provider": "openai",
+                  "max_tokens": 32768,
+                  "active": true
+                },
+                "gpt-3.5-turbo": {
+                  "description": "Description of openai gpt-3.5-turbo",
+                  "provider": "openai",
+                  "max_tokens": 4096,
+                  "active": true
+                },
+                "text-davinci-003": {
+                  "description": "Description of openai text-davinci-003",
+                  "provider": "openai",
+                  "max_tokens": 4000,
+                  "active": true
+                },
+                "text-davinci-002": {
+                  "description": "Description of openai text-davinci-002",
+                  "provider": "openai",
+                  "max_tokens": 4000,
+                  "active": true
+                },
+                "text-curie-001": {
+                  "description": "Description of openai text-curie-001",
+                  "provider": "openai",
+                  "max_tokens": 2048,
+                  "active": true
+                },
+                "text-babbage-001": {
+                  "description": "Description of openai text-babbage-001",
+                  "provider": "openai",
+                  "max_tokens": 2048,
+                  "active": true
+                },
+                "text-ada-001": {
+                  "description": "Description of openai text-ada-001",
+                  "provider": "openai",
+                  "max_tokens": 2048,
+                  "active": true
+                },
+                "gpt-j-6b": {
+                  "description": "Description of gooseai gpt-j-6b",
+                  "provider": "gooseai",
+                  "max_tokens": 2048,
+                  "active": true
+                },
+                "gpt-neo-20b": {
+                  "description": "Description of gooseai gpt-neo-20b",
+                  "provider": "gooseai",
+                  "max_tokens": 2048,
+                  "active": true
+                }
+              }
+            },
+            "key_configuration": {
+              "title": "Key Configuration",
+              "default": {
+                "quality": 0.5,
+                "latency": 0.3,
+                "cost": 0.1,
+                "priority": 0.1,
+                "reference_model": "gpt-4"
+              }
+            }
+          }
+        },
+        "KeyCreateResponse": {
+          "title": "KeyCreateResponse",
+          "type": "object",
+          "properties": {
+            "created_key": {
+              "title": "Created Key",
+              "type": "string"
+            },
+            "key_end": {
+              "title": "Key End",
+              "type": "string"
+            }
+          }
+        },
+        "KeyDeleteResponse": {
+          "title": "KeyDeleteResponse",
+          "type": "object",
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "KeyUpdate": {
+          "title": "KeyUpdate",
+          "required": [
+            "is_active"
+          ],
+          "type": "object",
+          "properties": {
+            "description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "model_settings": {
+              "title": "Model Settings",
+              "type": "object"
+            },
+            "key_configuration": {
+              "title": "Key Configuration",
+              "type": "object"
+            },
+            "is_active": {
+              "title": "Is Active",
+              "type": "boolean"
+            }
+          }
+        },
+        "Key_Billing": {
+          "title": "Key_Billing",
+          "required": [
+            "key_id",
+            "auth0_id",
+            "tokens_sum",
+            "costs_sum"
+          ],
+          "type": "object",
+          "properties": {
+            "key_id": {
+              "title": "Key Id",
+              "type": "string",
+              "format": "uuid"
+            },
+            "auth0_id": {
+              "title": "Auth0 Id",
+              "type": "string"
+            },
+            "tokens_sum": {
+              "title": "Tokens Sum",
+              "type": "integer"
+            },
+            "costs_sum": {
+              "title": "Costs Sum",
+              "type": "number"
+            }
+          }
+        },
+        "Key_Billing_Interval": {
+          "title": "Key_Billing_Interval",
+          "required": [
+            "time",
+            "prompt_cost",
+            "completion_cost",
+            "total_cost"
+          ],
+          "type": "object",
+          "properties": {
+            "time": {
+              "title": "Time",
+              "type": "string",
+              "format": "date-time"
+            },
+            "prompt_cost": {
+              "title": "Prompt Cost",
+              "type": "number"
+            },
+            "completion_cost": {
+              "title": "Completion Cost",
+              "type": "number"
+            },
+            "total_cost": {
+              "title": "Total Cost",
+              "type": "number"
+            }
+          }
+        },
+        "Model": {
+          "title": "Model",
+          "required": [
+            "price_per_token_usd",
+            "category"
+          ],
+          "type": "object",
+          "properties": {
+            "active": {
+              "title": "Active",
+              "type": "boolean",
+              "default": false
+            },
+            "chat": {
+              "title": "Chat",
+              "type": "boolean",
+              "default": true
+            },
+            "latency": {
+              "title": "Latency",
+              "type": "integer",
+              "default": 1
+            },
+            "max_token_request": {
+              "title": "Max Token Request",
+              "type": "integer",
+              "default": 0
+            },
+            "weight": {
+              "title": "Weight",
+              "type": "integer",
+              "default": 99
+            },
+            "price_per_token_usd": {
+              "title": "Price Per Token Usd",
+              "type": "number"
+            },
+            "category": {
+              "title": "Category",
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "OrgAdminAuth0": {
+          "title": "OrgAdminAuth0",
+          "required": [
+            "email"
+          ],
+          "type": "object",
+          "properties": {
+            "email": {
+              "title": "Email",
+              "type": "string"
+            },
+            "email_verified": {
+              "title": "Email Verified",
+              "type": "boolean"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "given_name": {
+              "title": "Given Name",
+              "type": "string"
+            },
+            "family_name": {
+              "title": "Family Name",
+              "type": "string"
+            },
+            "picture": {
+              "title": "Picture",
+              "type": "string"
+            },
+            "locale": {
+              "title": "Locale",
+              "type": "string"
+            },
+            "updated_at": {
+              "title": "Updated At",
+              "type": "string"
+            },
+            "user_id": {
+              "title": "User Id",
+              "type": "string"
+            },
+            "nickname": {
+              "title": "Nickname",
+              "type": "string"
+            },
+            "created_at": {
+              "title": "Created At",
+              "type": "string"
+            },
+            "last_login": {
+              "title": "Last Login",
+              "type": "string"
+            },
+            "last_ip": {
+              "title": "Last Ip",
+              "type": "string"
+            },
+            "logins_count": {
+              "title": "Logins Count",
+              "type": "string"
+            },
+            "blocked": {
+              "title": "Blocked",
+              "type": "boolean",
+              "default": false
+            },
+            "user_metadata": {
+              "title": "User Metadata",
+              "allOf": [
+                {
+                  "title": "UserMetadata",
+                  "type": "object",
+                  "properties": {
+                    "is_admin": {
+                      "title": "Is Admin",
+                      "type": "boolean"
+                    },
+                    "is_editor": {
+                      "title": "Is Editor",
+                      "type": "boolean"
+                    },
+                    "is_viewer": {
+                      "title": "Is Viewer",
+                      "type": "boolean"
+                    },
+                    "is_active": {
+                      "title": "Is Active",
+                      "type": "boolean"
+                    },
+                    "org_id": {
+                      "title": "Org Id",
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "org_invite_pending": {
+                      "title": "Org Invite Pending",
+                      "type": "boolean"
+                    }
+                  }
+                }
+              ],
+              "default": {}
+            }
+          }
+        },
+        "OrgCreateResponse": {
+          "title": "OrgCreateResponse",
+          "required": [
+            "org_name"
+          ],
+          "type": "object",
+          "properties": {
+            "org_name": {
+              "title": "Org Name",
+              "type": "string"
+            },
+            "org_display_name": {
+              "title": "Org Display Name",
+              "type": "string"
+            }
+          }
+        },
+        "Provider": {
+          "title": "Provider",
+          "required": [
+            "model"
+          ],
+          "type": "object",
+          "properties": {
+            "active": {
+              "title": "Active",
+              "type": "boolean",
+              "default": false
+            },
+            "weight": {
+              "title": "Weight",
+              "type": "integer",
+              "default": 99
+            },
+            "model": {
+              "title": "Model",
+              "type": "object",
+              "additionalProperties": {
+                "title": "Model",
+                "required": [
+                  "price_per_token_usd",
+                  "category"
+                ],
+                "type": "object",
+                "properties": {
+                  "active": {
+                    "title": "Active",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "chat": {
+                    "title": "Chat",
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "latency": {
+                    "title": "Latency",
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "max_token_request": {
+                    "title": "Max Token Request",
+                    "type": "integer",
+                    "default": 0
+                  },
+                  "weight": {
+                    "title": "Weight",
+                    "type": "integer",
+                    "default": 99
+                  },
+                  "price_per_token_usd": {
+                    "title": "Price Per Token Usd",
+                    "type": "number"
+                  },
+                  "category": {
+                    "title": "Category",
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Request_Normalized": {
+          "title": "Request_Normalized",
+          "required": [
+            "provider",
+            "request_type",
+            "response",
+            "id",
+            "prompt_tokens",
+            "completion_tokens",
+            "total_tokens",
+            "prompt_tokens_cost",
+            "completion_tokens_cost",
+            "total_tokens_cost",
+            "created"
+          ],
+          "type": "object",
+          "properties": {
+            "provider": {
+              "title": "Provider",
+              "type": "string"
+            },
+            "request_type": {
+              "title": "Request Type",
+              "type": "string"
+            },
+            "model": {
+              "title": "Model",
+              "type": "string"
+            },
+            "prompt": {
+              "title": "Prompt",
+              "type": "string"
+            },
+            "key_id": {
+              "title": "Key Id",
+              "type": "string",
+              "format": "uuid"
+            },
+            "auth0_id": {
+              "title": "Auth0 Id",
+              "type": "string"
+            },
+            "payload": {
+              "title": "Payload",
+              "type": "object"
+            },
+            "response": {
+              "title": "Response",
+              "type": "object"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string",
+              "format": "uuid"
+            },
+            "prompt_tokens": {
+              "title": "Prompt Tokens",
+              "type": "integer"
+            },
+            "completion_tokens": {
+              "title": "Completion Tokens",
+              "type": "integer"
+            },
+            "total_tokens": {
+              "title": "Total Tokens",
+              "type": "integer"
+            },
+            "prompt_tokens_cost": {
+              "title": "Prompt Tokens Cost",
+              "type": "number"
+            },
+            "completion_tokens_cost": {
+              "title": "Completion Tokens Cost",
+              "type": "number"
+            },
+            "total_tokens_cost": {
+              "title": "Total Tokens Cost",
+              "type": "number"
+            },
+            "created": {
+              "title": "Created",
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "RoutingTable": {
+          "title": "RoutingTable",
+          "required": [
+            "openai",
+            "gooseai"
+          ],
+          "type": "object",
+          "properties": {
+            "openai": {
+              "title": "Provider",
+              "required": [
+                "model"
+              ],
+              "type": "object",
+              "properties": {
+                "active": {
+                  "title": "Active",
+                  "type": "boolean",
+                  "default": false
+                },
+                "weight": {
+                  "title": "Weight",
+                  "type": "integer",
+                  "default": 99
+                },
+                "model": {
+                  "title": "Model",
+                  "type": "object",
+                  "additionalProperties": {
+                    "title": "Model",
+                    "required": [
+                      "price_per_token_usd",
+                      "category"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "active": {
+                        "title": "Active",
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "chat": {
+                        "title": "Chat",
+                        "type": "boolean",
+                        "default": true
+                      },
+                      "latency": {
+                        "title": "Latency",
+                        "type": "integer",
+                        "default": 1
+                      },
+                      "max_token_request": {
+                        "title": "Max Token Request",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "weight": {
+                        "title": "Weight",
+                        "type": "integer",
+                        "default": 99
+                      },
+                      "price_per_token_usd": {
+                        "title": "Price Per Token Usd",
+                        "type": "number"
+                      },
+                      "category": {
+                        "title": "Category",
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "gooseai": {
+              "title": "Provider",
+              "required": [
+                "model"
+              ],
+              "type": "object",
+              "properties": {
+                "active": {
+                  "title": "Active",
+                  "type": "boolean",
+                  "default": false
+                },
+                "weight": {
+                  "title": "Weight",
+                  "type": "integer",
+                  "default": 99
+                },
+                "model": {
+                  "title": "Model",
+                  "type": "object",
+                  "additionalProperties": {
+                    "title": "Model",
+                    "required": [
+                      "price_per_token_usd",
+                      "category"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "active": {
+                        "title": "Active",
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "chat": {
+                        "title": "Chat",
+                        "type": "boolean",
+                        "default": true
+                      },
+                      "latency": {
+                        "title": "Latency",
+                        "type": "integer",
+                        "default": 1
+                      },
+                      "max_token_request": {
+                        "title": "Max Token Request",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "weight": {
+                        "title": "Weight",
+                        "type": "integer",
+                        "default": 99
+                      },
+                      "price_per_token_usd": {
+                        "title": "Price Per Token Usd",
+                        "type": "number"
+                      },
+                      "category": {
+                        "title": "Category",
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "UserMetadata": {
+          "title": "UserMetadata",
+          "type": "object",
+          "properties": {
+            "is_admin": {
+              "title": "Is Admin",
+              "type": "boolean"
+            },
+            "is_editor": {
+              "title": "Is Editor",
+              "type": "boolean"
+            },
+            "is_viewer": {
+              "title": "Is Viewer",
+              "type": "boolean"
+            },
+            "is_active": {
+              "title": "Is Active",
+              "type": "boolean"
+            },
+            "org_id": {
+              "title": "Org Id",
+              "type": "string",
+              "format": "uuid"
+            },
+            "org_invite_pending": {
+              "title": "Org Invite Pending",
+              "type": "boolean"
+            }
+          }
+        },
+        "ValidationError": {
+          "title": "ValidationError",
+          "required": [
+            "loc",
+            "msg",
+            "type"
+          ],
+          "type": "object",
+          "properties": {
+            "loc": {
+              "title": "Location",
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ]
+              }
+            },
+            "msg": {
+              "title": "Message",
+              "type": "string"
+            },
+            "type": {
+              "title": "Error Type",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "HTTPBearer": {
+          "type": "http",
+          "scheme": "bearer"
+        }
+      }
+    }
+  }

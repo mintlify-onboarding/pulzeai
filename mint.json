@@ -38,8 +38,7 @@
         "api-reference/post-knowledge-graph",
         "api-reference/update-specific-key",
         "api-reference/protected-chat",
-        "api-reference/protected-completions",
-        "api-reference/chat-completion-schema"
+        "api-reference/protected-completions"
       ]
     }
   ],

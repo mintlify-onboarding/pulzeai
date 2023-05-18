@@ -20,20 +20,26 @@
   },
   "navigation": [
     {
-      "group": "Home",
-      "pages": ["introduction", "features"]
-    },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
-    },
-    {
-      "group": "Endpoint Examples",
+      "group": "APIs",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "api-reference/get-billing",
+        "api-reference/get-billing-minute",
+        "api-reference/get-billing-daily",
+        "api-reference/get-billing-monthly",
+        "api-reference/get-keys",
+        "api-reference/update-keys",
+        "api-reference/delete-keys",
+        "api-reference/create-key",
+        "api-reference/get-logs",
+        "api-reference/get-log-key-id",
+        "api-reference/create-org",
+        "api-reference/get-keys-admin",
+        "api-reference/get-knowledge",
+        "api-reference/post-knowledge-graph",
+        "api-reference/update-specific-key",
+        "api-reference/protected-chat",
+        "api-reference/protected-completions",
+        "api-reference/chat-completion-schema"
       ]
     }
   ],

@@ -16,7 +16,10 @@
   "colors": {
     "primary": "#EB018C",
     "light": "#FB4EC7",
-    "dark": "#A500F4"
+    "dark": "#EB018C",
+    "background": {
+      "dark": "#0F1014"
+    }
   },
   "api": {
     "baseUrl": "https://api.pulze.ai",

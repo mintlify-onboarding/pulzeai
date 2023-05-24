@@ -147,7 +147,7 @@
           "tags": [
             "billing"
           ],
-          "summary": "Read Billing By Key Id Daily",
+          "summary": "Read Billing By Key Id Minute",
           "description": "Get a specific API Key by id.",
           "operationId": "read_billing_by_key_id_daily_v1_billing__key_id__minute_get",
           "parameters": [
@@ -429,7 +429,7 @@
           "tags": [
             "billing"
           ],
-          "summary": "Read Billing By Key Id Daily",
+          "summary": "Read Billing By Key Id Monthly",
           "description": "Get a specific API Key by id.",
           "operationId": "read_billing_by_key_id_daily_v1_billing__key_id__monthly_get",
           "parameters": [

@@ -1,17 +1,27 @@
 {
+  "$schema": "https://mintlify.com/schema.json",
   "name": "Pulze.ai",
   "logo": {
     "dark": "/logo/dark.png",
     "light": "/logo/light.png"
   },
+  "anchors": [
+    {
+      "name": "Get Early Access",
+      "icon": "circle-play",
+      "url": "https://pulze.ai/#notify"
+    }
+  ],
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#EB018C",
     "light": "#FB4EC7",
-    "dark": "#A500F4",
-    "anchors": {
-      "from": "#EB018C",
-      "to": "#EB6142"
+    "dark": "#A500F4"
+  },
+  "api": {
+    "baseUrl": "https://api.pulze.ai",
+    "auth": {
+      "method": "bearer"
     }
   },
   "topbarCtaButton": {
@@ -42,7 +52,9 @@
       ]
     }
   ],
+  "backgroundImage": "/background.png",
   "footerSocials": {
-    "website": "https://pulze.ai"
+    "website": "https://pulze.ai",
+    "twitter": "https://twitter.com/PulzeAi"
   }
 }

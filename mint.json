@@ -10,6 +10,11 @@
       "name": "Get Early Access",
       "icon": "circle-play",
       "url": "https://pulze.ai/#notify"
+    },
+    {
+      "name": "Internal APIs",
+      "icon": "terminal-rectangle",
+      "url": "internal"
     }
   ],
   "favicon": "/favicon.png",
@@ -35,26 +40,35 @@
     {
       "group": "APIs",
       "pages": [
-        "api-reference/get-billing",
-        "api-reference/get-billing-minute",
-        "api-reference/get-billing-daily",
-        "api-reference/get-billing-monthly",
-        "api-reference/get-keys",
-        "api-reference/update-keys",
-        "api-reference/delete-keys",
-        "api-reference/create-key",
-        "api-reference/get-logs",
-        "api-reference/get-log-key-id",
-        "api-reference/create-org",
-        "api-reference/get-keys-admin",
-        "api-reference/get-knowledge",
-        "api-reference/post-knowledge-graph",
-        "api-reference/update-specific-key",
         "api-reference/protected-chat",
         "api-reference/protected-completions"
       ]
+    },
+    {
+      "group": "Internal APIs",
+      "pages": [
+        "internal/get-billing",
+        "internal/get-billing-minute",
+        "internal/get-billing-daily",
+        "internale/get-billing-monthly",
+        "internal/get-keys",
+        "internal/update-keys",
+        "internal/delete-keys",
+        "internal/create-key",
+        "internal/get-logs",
+        "internal/get-log-key-id",
+        "internal/create-org",
+        "internal/get-keys-admin",
+        "internal/get-knowledge",
+        "internal/post-knowledge-graph",
+        "internal/update-specific-key"
+      ]
     }
   ],
+  "modeToggle": {
+    "default": "light",
+    "isHidden": true
+  },
   "backgroundImage": "/background.png",
   "footerSocials": {
     "website": "https://pulze.ai",

@@ -13,8 +13,9 @@
     },
     {
       "name": "Internal APIs",
-      "icon": "terminal-rectangle",
-      "url": "internal"
+      "icon": "rectangle-terminal",
+      "url": "internal",
+      "isDefaultHidden": true
     }
   ],
   "favicon": "/favicon.png",
